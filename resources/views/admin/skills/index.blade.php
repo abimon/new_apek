@@ -35,7 +35,7 @@
                                 <form action="{{ route('admin.skills.destroy', $skill) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="button-secondary" style="background: rgba(248, 113, 113, 0.16);">Delete</button>
+                                    <button type="submit" class="btn btn-secondary" style="background: rgba(248, 113, 113, 0.16);">Delete</button>
                                 </form>
                             </td>
                         </tr>

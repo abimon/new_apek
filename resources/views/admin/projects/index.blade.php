@@ -7,11 +7,11 @@
                 <h1 style="margin: 0; color: #fff;">Projects</h1>
                 <p style="margin: 0.5rem 0 0; color: #94a3b8;">Manage project entries in the portfolio.</p>
             </div>
-            <a href="{{ route('admin.projects.create') }}" class="button-primary">New Project</a>
+            <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">New Project</a>
         </div>
 
         @if(session('success'))
-            <div style="background: #10b981; color: white; padding: 1rem; border-radius: 1rem;">{{ session('success') }}</div>
+        <div style="background: #10b981; color: white; padding: 1rem; border-radius: 1rem;">{{ session('success') }}</div>
         @endif
 
         <div class="glass-panel" style="padding: 1.5rem; overflow-x: auto;">
@@ -21,24 +21,25 @@
                         <th style="padding: 1rem 0;">Title</th>
                         <th>Category</th>
                         <th>Featured</th>
-                        <th>Actions</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($projects as $project)
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                            <td style="padding: 1rem 0; color: #f8fafc;">{{ $project->title }}</td>
-                            <td style="color: #cbd5e1;">{{ $project->category }}</td>
-                            <td style="color: #cbd5e1;">{{ $project->featured ? 'Yes' : 'No' }}</td>
-                            <td style="display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 1rem 0;">
-                                <a href="{{ route('admin.projects.edit', $project) }}" class="button-secondary">Edit</a>
-                                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="button-secondary" style="background: rgba(248, 113, 113, 0.16);">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);white-space:nowrap;">
+                        <td style="padding: 1rem 0; color: #f8fafc;">{{ $project->title }}</td>
+                        <td style="color: #cbd5e1;">{{ $project->category }}</td>
+                        <td style="color: #cbd5e1;">{{ $project->featured ? 'Yes' : 'No' }}</td>
+                        <td class="d-flex justify-content-center align-items-center" style="gap: 1rem;">
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-secondary">View</a>
+                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" style="background: rgba(248, 113, 113, 0.16);">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

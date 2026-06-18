@@ -31,11 +31,11 @@
                             <td style="color: #cbd5e1;">{{ $testimonial->company }}</td>
                             <td style="color: #cbd5e1;">{{ $testimonial->designation }}</td>
                             <td style="display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 1rem 0;">
-                                <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="button-secondary">Edit</a>
+                                <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="btn btn-secondary">Edit</a>
                                 <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="button-secondary" style="background: rgba(248, 113, 113, 0.16);">Delete</button>
+                                    <button type="submit" class="btn btn-secondary" style="background: rgba(248, 113, 113, 0.16);">Delete</button>
                                 </form>
                             </td>
                         </tr>

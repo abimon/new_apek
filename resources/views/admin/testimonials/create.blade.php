@@ -14,7 +14,7 @@
             <input type="text" name="designation" value="{{ old('designation') }}" placeholder="Designation" required style="padding: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #f8fafc;" />
             <textarea name="testimonial" rows="5" placeholder="Testimonial" required style="padding: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #f8fafc;">{{ old('testimonial') }}</textarea>
             <input type="url" name="image" value="{{ old('image') }}" placeholder="Image URL" style="padding: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #f8fafc;" />
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;"><button type="submit" class="button-primary">Save Testimonial</button><a href="{{ route('admin.testimonials.index') }}" class="button-secondary">Cancel</a></div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;"><button type="submit" class="btn btn-primary">Save Testimonial</button><a href="{{ route('admin.testimonials.index') }}" class="btn btn-secondary">Cancel</a></div>
         </form>
     </section>
 </x-dash>

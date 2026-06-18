@@ -18,7 +18,7 @@
             <input type="url" name="github_url" value="{{ old('github_url', $project->github_url) }}" placeholder="GitHub URL" style="padding: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #f8fafc;" />
             <input type="url" name="live_url" value="{{ old('live_url', $project->live_url) }}" placeholder="Live URL" style="padding: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #f8fafc;" />
             <label style="display: inline-flex; align-items: center; gap: 0.75rem; color: #cbd5e1;"><input type="checkbox" name="featured" value="1" {{ old('featured', $project->featured) ? 'checked' : '' }} /> Featured</label>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;"><button type="submit" class="button-primary">Update Project</button><a href="{{ route('admin.projects.index') }}" class="button-secondary">Cancel</a></div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;"><button type="submit" class="btn btn-primary">Update Project</button><a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Cancel</a></div>
         </form>
     </section>
 </x-layout>

@@ -3,7 +3,7 @@
 
 <head>
     @include("partials.head.head-meta")
-    <title>Dashboard</title>
+    <title>APEK |{{ $title ??'Dashboard' }}</title>
     <link rel="stylesheet" href="/storage/node_modules/swiper/swiper-bundle.min.css" />
     @include("partials.head.head-links")
     <style>
