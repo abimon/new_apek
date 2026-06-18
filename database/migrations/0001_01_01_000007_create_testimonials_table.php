@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('client_name');
             $table->string('company');
             $table->string('designation');
-            $table->text('testimonial');
+            $table->longText('testimonial');
             $table->string('image')->nullable();
             $table->timestamps();
         });

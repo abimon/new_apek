@@ -1,4 +1,4 @@
-<x-layout>
+<x-dash>
     <x-slot name="title">New Testimonial | Admin Panel</x-slot>
 
     <section style="padding: 2.5rem 0; display: grid; gap: 1rem; max-width: 720px; margin: 0 auto;">
@@ -17,4 +17,4 @@
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;"><button type="submit" class="button-primary">Save Testimonial</button><a href="{{ route('admin.testimonials.index') }}" class="button-secondary">Cancel</a></div>
         </form>
     </section>
-</x-layout>
+</x-dash>

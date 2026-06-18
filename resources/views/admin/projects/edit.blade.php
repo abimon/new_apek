@@ -1,4 +1,4 @@
-<x-layout>
+<x-dash>
     <x-slot name="title">Edit Project | Admin Panel</x-slot>
 
     <section style="padding: 2.5rem 0; display: grid; gap: 1rem; max-width: 720px; margin: 0 auto;">

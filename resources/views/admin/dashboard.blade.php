@@ -12,8 +12,9 @@
             <div class="card card-lg mt-3 mb-3">
                 <!-- card header -->
                 <div class="card-header border-bottom-0">
-                    <div>
-                        <h5 class="mb-0">Orders</h5>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="mb-0">Products</h5>
+                        <button class="btn btn-sm btn-primary"><i class="bi bi-plus"></i> Add Product</button>
                     </div>
                 </div>
                 <!-- table -->
@@ -21,55 +22,38 @@
                     <table class="table text-nowrap mb-0 table-centered table-hover">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Amount</th>
-                                <th>Shipping Method</th>
-                                <th>Delivery Date</th>
+                                <th>Product ID</th>
+                                <th>Name</th>
+                                <th>Version</th>
+                                <th>Expirely Date</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($products as $product)
                             <tr>
-                                <td>#DU005</td>
-                                <td>$150</td>
-                                <td>Standard</td>
-                                <td>Jan 20, 2025</td>
-                                <td><span class="badge text-info-emphasis bg-info-subtle">Shipped</span></td>
-                                <td><a href="#!" class="btn btn-white btn-sm">View</a></td>
+                                <td>{{$product->id}}</td>
+                                <td>{{$product->name}}</td>
+                                <td>{{$product->version}}</td>
+                                <td>{{$product->expirely_date}}</td>
+                                <td>
+                                    @if ($product->status == 1)
+                                    <span class="badge bg-success">Active</span>
+                                    @else
+                                    <span class="badge bg-danger">Inactive</span>
+                                    @endif
+                                </td>
+                                <td></td>
                             </tr>
+                            @empty
                             <tr>
-                                <td>#DU004</td>
-                                <td>$200</td>
-                                <td>Express</td>
-                                <td>Jan 22, 2025</td>
-                                <td><span class="badge text-warning-emphasis bg-warning-subtle">Pending</span></td>
-                                <td><a href="#!" class="btn btn-white btn-sm">View</a></td>
+                                <td colspan="6" class="text-center">
+                                    <i class="bi bi-inbox fs-6"></i><br>
+                                    No Products Found
+                                </td>
                             </tr>
-                            <tr>
-                                <td>#DU003</td>
-                                <td>$300</td>
-                                <td>Overnight</td>
-                                <td>Jan 18, 2025</td>
-                                <td><span class="badge text-danger-emphasis bg-danger-subtle">Cancel</span></td>
-                                <td><a href="#!" class="btn btn-white btn-sm">View</a></td>
-                            </tr>
-                            <tr>
-                                <td>#DU002</td>
-                                <td>$560</td>
-                                <td>Overnight</td>
-                                <td>Jan 13, 2025</td>
-                                <td><span class="badge text-success-emphasis bg-success-subtle">Completed</span></td>
-                                <td><a href="#!" class="btn btn-white btn-sm">View</a></td>
-                            </tr>
-                            <tr>
-                                <td>#DU002</td>
-                                <td>$560</td>
-                                <td>Overnight</td>
-                                <td>Jan 11, 2025</td>
-                                <td><span class="badge text-success-emphasis bg-success-subtle">Completed</span></td>
-                                <td><a href="#!" class="btn btn-white btn-sm">View</a></td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -85,10 +69,7 @@
                             <h5 class="mb-1">Ideas for You</h5>
                         </div>
                         <!-- swiper navigation-->
-                        <div class="swiper-navigation position-absolute top-50 end-10 me-4 me-lg-8 me-xl-4">
-                            <div class="swiper-button-prev ms-n3"></div>
-                            <div class="swiper-button-next ms-6"></div>
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -100,37 +81,12 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <div>
-                                            <h4>Create a Blog Post for your product</h4>
-
+                                            <h6>Create a Blog Post for your product</h6>
                                             <div>
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</p>
                                             </div>
-                                            <div class="mt-4">
-                                                <a href="#!" class="btn btn-white btn-sm">Read Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div>
-                                            <h4>Create a Blog Post for your product</h4>
-
-                                            <div>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</p>
-                                            </div>
-                                            <div class="mt-4">
-                                                <a href="#!" class="btn btn-white btn-sm">Read Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div>
-                                            <h4>Create a Blog Post for your product</h4>
-
-                                            <div>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</p>
-                                            </div>
-                                            <div class="mt-4">
-                                                <a href="#!" class="btn btn-white btn-sm">Read Now</a>
+                                            <div class="mt-2">
+                                                <a href="" class="btn btn-light btn-sm">Read Now</a>
                                             </div>
                                         </div>
                                     </div>

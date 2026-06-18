@@ -1,4 +1,4 @@
-<x-layout>
+<x-dash>
     <x-slot name="title">Admin Projects | Developer Portfolio</x-slot>
 
     <section style="padding: 2.5rem 0; display: grid; gap: 1rem;">
@@ -44,4 +44,4 @@
             </table>
         </div>
     </section>
-</x-layout>
+</x-dash>

@@ -10,6 +10,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function(){
@@ -42,8 +44,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         'skills'=>AdminSkillController::class,
         'blog-posts'=>AdminBlogPostController::class,
         'testimonials'=>AdminTestimonialController::class,
-        'products'=>ProductController::class,
-        'career'=>CareerController::class
+        'product'=>ProductController::class,
+        'career'=>CareerController::class,
+        'profile'=>ProfileController::class,
+        'users'=>UsersController::class,
     ]);
     Route::get('messages', [AdminMessageController::class, 'index'])->name('messages.index');
 });

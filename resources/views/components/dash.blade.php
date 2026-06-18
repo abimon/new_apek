@@ -19,7 +19,7 @@
             min-height: 100vh;
             margin: 0;
             line-height: 1.6;
-            font-family: 'Share Tech Mono', monospace;
+            /* font-family: 'Share Tech Mono', monospace; */
             /* font-family: 'JetBrains Mono', monospace; */
         }
 
@@ -47,7 +47,8 @@
         @include("partials.topbar-second")
         <!-- Main Content -->
         <div id="content" class="position-relative h-100">
-            @yield('content')
+            <!-- @yield('content') -->
+            {{ $slot ?? '' }}
         </div>
     </div>
 

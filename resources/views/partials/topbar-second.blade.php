@@ -18,7 +18,7 @@
       </div>
       <div class="d-none d-lg-block">
         <a class="sidebar-toggle d-flex texttooltip p-3" href="javascript:void(0)" data-template="collapseMessage">
-          <i class="bi bi-list-nested"></i>
+          <i class="bi bi-arrow-left-right"></i>
         </a>
       </div>
     </div>
