@@ -26,6 +26,8 @@ Route::controller(PageController::class)->group(function(){
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/contact', 'sendContact')->name('contact.send');
     Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
+    Route::get('/downloads', 'downloads')->name('downloads');
+
 });
 
 Route::middleware('guest')->controller(AuthController::class)->group(function () {

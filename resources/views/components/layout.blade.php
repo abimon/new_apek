@@ -35,7 +35,7 @@
         }
 
         .page-container {
-            max-width: 1200px;
+            max-width: 90vw;
             margin: 0 auto;
             padding: 0 1.25rem 3rem;
         }
@@ -46,18 +46,6 @@
             backdrop-filter: blur(16px);
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.24);
         }
-
-        /* .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.8rem;
-            background: rgba(56, 189, 248, 0.16);
-            color: #e0f2fe;
-            border-radius: 9999px;
-            font-size: 0.95rem;
-            font-weight: 600;
-        } */
 
         .button-primary {
             background-color: #2563EB;
@@ -125,37 +113,59 @@
 </head>
 
 <body style="background-image:url('/storage/images/back.jpg'); background-size: cover;">
-    <header class="page-container glass-panel p-3" style="padding-top: 1rem; ">
-        <nav class="fixed" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-            <a href="{{ route('home') }}">
+    <header class="page-container glass-panel p-3 mb-4" style="padding-top: 1rem; ">
+        <nav class="navbar navbar-expand-lg" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; color:white;">
+            <a href="{{ route('home') }}" class="navbar-brand text-white">
                 <h1 class="fw-bold fs-x-large" style="font-weight:bolder;font-size:x-large">APEK TECHNOLOGIES</h1>
             </a>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <a href="{{ route('home') }}" class="nav-link{{ request()->routeIs('home') ? ' active' : '' }}">Home</a>
-                <a href="{{ route('about') }}" class="nav-link{{ request()->routeIs('about') ? ' active' : '' }}">About</a>
-                <a href="{{ route('skills') }}" class="nav-link{{ request()->routeIs('skills') ? ' active' : '' }}">Skills</a>
-                <a href="{{ route('services') }}" class="nav-link{{ request()->routeIs('services') ? ' active' : '' }}">Services</a>
-                <a href="{{ route('projects') }}" class="nav-link{{ request()->routeIs('projects*') ? ' active' : '' }}">Projects</a>
-                <a href="{{ route('blog') }}" class="nav-link{{ request()->routeIs('blog*') ? ' active' : '' }}">Blog</a>
-                <a href="{{ route('contact') }}" class="nav-link{{ request()->routeIs('contact') ? ' active' : '' }}">Contact</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="gap: 3px;">
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link{{ request()->routeIs('home') ? ' active' : '' }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('about') }}" class="nav-link{{ request()->routeIs('about') ? ' active' : '' }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('skills') }}" class="nav-link{{ request()->routeIs('skills') ? ' active' : '' }}">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('services') }}" class="nav-link{{ request()->routeIs('services') ? ' active' : '' }}">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('projects') }}" class="nav-link{{ request()->routeIs('projects*') ? ' active' : '' }}">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('downloads') }}" class="nav-link{{ request()->routeIs('projects*') ? ' active' : '' }}">Downloads</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('blog') }}" class="nav-link{{ request()->routeIs('blog*') ? ' active' : '' }}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('contact') }}" class="nav-link{{ request()->routeIs('contact') ? ' active' : '' }}">Contact</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
 
-    <div class="glass-panel p-3 m-4">
-        <main class="page-container p-4">
+    <div class="page-container glass-panel p-3">
+        <main class="m-4">
             {{ $slot ?? '' }}
         </main>
 
-        <footer class="page-container" style="padding-top: 0;">
+        <footer class="page-container" style="padding-top: 0;color:white;">
             <div class="glass-panel" style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;">
                 <div>
                     <p style="margin: 0; font-weight: 600;">Ready to build your next digital product?</p>
                     <p style="margin: 0.5rem 0 0; color: #94a3b8;">Let's connect and build solutions that grow with your business.</p>
                 </div>
-                <a href="{{ route('contact') }}" class="button-primary">Hire Me</a>
+                <a href="{{ route('contact') }}" class="button-primary">Hire Us</a>
             </div>
-            <p style="margin-top: 1.5rem; color: #94a3b8; font-size: 0.9rem;">© {{ date('Y') }} Full-Stack Software Engineer. All rights reserved.</p>
+            <p style="margin-top: 1.5rem; color: #94a3b8; font-size: 0.9rem;">© {{ date('Y') }} APEK Technologies. All rights reserved.</p>
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

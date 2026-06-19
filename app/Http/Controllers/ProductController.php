@@ -28,7 +28,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(request()->file('file')){
+            $path=request()->file('file')->store('files', 'public');
+        }
+        else{
+            return back()->with('error','Please select a file to upload');
+        }
+        Product::create([
+            'name'=>request('filename'),
+            'description'=>request('description'),
+            'image'=>null,
+            'price'=>request('price'),
+            'link'=>$path,
+            'is_active'=>true
+        ]);
+        return back()->with('success','File uploaded successfully');
     }
 
     /**

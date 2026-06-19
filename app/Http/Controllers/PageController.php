@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use App\Models\Message;
+use App\Models\Product;
 use App\Models\Project;
 use App\Models\Skill;
 use App\Models\Testimonial;
@@ -169,5 +170,10 @@ class PageController extends Controller
         $projects = Project::query()->pluck('slug');
 
         return response()->view('sitemap', compact('urls', 'posts', 'projects'))->header('Content-Type', 'application/xml');
+    }
+    public function downloads(){
+        return view('downloads',[
+            'items'=>Product::where('is_active','available')->get()
+        ]);
     }
 }

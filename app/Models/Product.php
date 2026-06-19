@@ -12,6 +12,6 @@ class Product extends Model
         'image',
         'price',
         'link',
-        'is_active',
+        'is_active'
     ];
 }
