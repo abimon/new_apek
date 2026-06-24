@@ -9,9 +9,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::controller(KamandeController::class)->group(function () {
-    Route::get('/kamandes', 'index');
-    Route::post('/kamandes', 'store');
-    Route::get('/kamandes/{kamande}', 'show');
-    Route::put('/kamandes/{kamande}', 'update');
-    Route::delete('/kamandes/{kamande}', 'destroy');
+    Route::get('/school', 'index');
+    Route::post('/school', 'store');
+    Route::get('/school/{id}', 'show');
+    Route::put('/school/{id}', 'update');
+    Route::delete('/school/{id}', 'destroy');
 });
