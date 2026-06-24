@@ -10,8 +10,8 @@ Route::get('/user', function (Request $request) {
 
 Route::controller(KamandeController::class)->group(function () {
     Route::get('/school', 'index');
-    Route::post('/school', 'store');
+    Route::post('/school/store', 'store');
     Route::get('/school/{id}', 'show');
-    Route::put('/school/{id}', 'update');
-    Route::delete('/school/{id}', 'destroy');
+    Route::put('/school/update/{id}', 'update');
+    Route::delete('/school/delete/{id}', 'destroy');
 });
