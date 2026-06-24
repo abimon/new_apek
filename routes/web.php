@@ -53,3 +53,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     ]);
     Route::get('messages', [AdminMessageController::class, 'index'])->name('messages.index');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
