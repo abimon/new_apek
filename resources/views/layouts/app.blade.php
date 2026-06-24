@@ -154,7 +154,7 @@
 
     <div class="page-container glass-panel p-3">
         <main class="m-4">
-            {{ $slot ?? '' }}
+            @yield('content')
         </main>
 
         <footer class="page-container" style="padding-top: 0;color:white;">
