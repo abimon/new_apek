@@ -176,4 +176,7 @@ class PageController extends Controller
             'items'=>Product::where('is_active','available')->get()
         ]);
     }
+    public function privacy(string $policy){
+        return view('privacy',compact('policy'));
+    }
 }

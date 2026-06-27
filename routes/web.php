@@ -28,6 +28,7 @@ Route::controller(PageController::class)->group(function(){
     Route::post('/contact', 'sendContact')->name('contact.send');
     Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
     Route::get('/downloads', 'downloads')->name('downloads');
+    Route::get('/privacy-policy/{company}','privacy')->name('privacy');
 
 });
 
