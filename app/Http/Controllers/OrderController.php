@@ -37,10 +37,12 @@ class OrderController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'payphone' => 'required|string|max:20',
-            'items' => 'required|array',
+            'items' => 'required|string',
             'total' => 'required|numeric',
         ]);
-
+        if (!$validated) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $validated], 422);
+        }
         // Generate a unique order code if not provided
         if (empty($validated['order_code'])) {
             $validated['order_code'] = strtoupper(uniqid('ORDER_'));
