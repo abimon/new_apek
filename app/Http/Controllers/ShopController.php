@@ -13,6 +13,9 @@ class ShopController extends Controller
      */
     public function index()
     {
+        if(request()->is('api/*')){
+            return response()->json(['products'=> Shop::all()], 200);
+        }
         $products = Shop::simplePaginate(10);
         return view('admin.shop.index', compact('products'));
     }

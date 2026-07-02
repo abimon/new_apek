@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KamandeController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,11 @@ Route::controller(KamandeController::class)->group(function () {
     Route::get('/school/{id}', 'show');
     Route::put('/school/update/{id}', 'update');
     Route::delete('/school/delete/{id}', 'destroy');
+});
+Route::controller(ShopController::class)->group(function () {
+    Route::get('/shop', 'index');
+    Route::post('/shop/store', 'store');
+    Route::get('/shop/{id}', 'show');
+    Route::put('/shop/update/{id}', 'update');
+    Route::delete('/shop/delete/{id}', 'destroy');
 });
