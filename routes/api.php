@@ -17,9 +17,9 @@ Route::controller(KamandeController::class)->group(function () {
     Route::delete('/school/delete/{id}', 'destroy');
 });
 Route::controller(ShopController::class)->group(function () {
-    Route::get('/shop', 'index');
-    Route::post('/shop/store', 'store');
-    Route::get('/shop/{id}', 'show');
-    Route::put('/shop/update/{id}', 'update');
-    Route::delete('/shop/delete/{id}', 'destroy');
+    Route::get('/products', 'index');
+    Route::post('/products/store', 'store')->middleware('auth:sanctum');
+    Route::get('/products/{id}', 'show');
+    Route::put('/products/update/{id}', 'update')->middleware('auth:sanctum');
+    Route::delete('/products/delete/{id}', 'destroy')->middleware('auth:sanctum');
 });
