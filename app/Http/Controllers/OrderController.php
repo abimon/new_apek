@@ -46,8 +46,8 @@ class OrderController extends Controller
             $validated['order_code'] = strtoupper(uniqid('ORDER_'));
         }
 
-        $order = Order::create($validated)->except($validated['payphone']);
-        $this->Pay($validated['total'], request('payphone'), $validated['order_code']);
+        $order = Order::create($validated);
+        $this->Pay($validated['total'], $validated['payphone'], $validated['order_code']);
         return response()->json(['message' => 'Order created successfully', 'order_code' => $order->order_code], 201);
     }
 
