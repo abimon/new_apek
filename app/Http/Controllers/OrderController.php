@@ -36,6 +36,7 @@ class OrderController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
+            'payphone' => 'required|string|max:20',
             'items' => 'required|array',
             'total' => 'required|numeric',
         ]);
@@ -45,8 +46,8 @@ class OrderController extends Controller
             $validated['order_code'] = strtoupper(uniqid('ORDER_'));
         }
 
-        $order = Order::create($validated);
-        $this->Pay($validated['total'], $validated['phone'], $validated['order_code']);
+        $order = Order::create($validated)->except($validated['payphone']);
+        $this->Pay($validated['total'], request('payphone'), $validated['order_code']);
         return response()->json(['message' => 'Order created successfully', 'order_code' => $order->order_code], 201);
     }
 
