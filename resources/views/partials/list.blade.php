@@ -1,6 +1,14 @@
 <ul class="navbar-nav flex-column  ">
     <!-- Projects item -->
     <li class="nav-item">
+        <a class="nav-link" href="/admin">
+            <span class="nav-icon">
+                <i class="bi bi-window-sidebar"></i>
+            </span>
+            <span class="text">Dashboard</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.projects.index') }}">
             <span class="nav-icon">
                 <i class="bi bi-kanban"></i>
@@ -64,5 +72,12 @@
             <span class="text">Users</span>
         </a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.shop.index') }}">
+            <span class="nav-icon">
+                <i class="bi bi-shop"></i>
+            </span>
+            <span class="text">CHALK SHOP</span>
+        </a>
+    </li>
 </ul>

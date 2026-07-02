@@ -3,7 +3,7 @@
 
 <head>
     @include("partials.head.head-meta")
-    <title>APEK |{{ $title ??'Dashboard' }}</title>
+    <title>APEK | {{ $title ??'Dashboard' }}</title>
     <link rel="stylesheet" href="/storage/node_modules/swiper/swiper-bundle.min.css" />
     @include("partials.head.head-links")
     <style>
@@ -47,7 +47,6 @@
         @include("partials.topbar-second")
         <!-- Main Content -->
         <div id="content" class="position-relative h-100">
-            <!-- @yield('content') -->
             {{ $slot ?? '' }}
         </div>
     </div>

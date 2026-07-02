@@ -2,6 +2,9 @@
     <x-slot name="title">Login | Developer Portfolio</x-slot>
     <section style="padding: 4rem 0; display: grid; gap: 1.5rem; max-width: 520px; margin: 0 auto;">
         <div class="glass-panel" style="padding: 2rem;">
+            @if(session()->has('errors'))
+                <div class="alert alert-danger">{{ session()->get('error') }}</div>
+            @endif
             <h1 style="margin-top: 0; color: #fff;">Admin Login</h1>
             <form method="POST" action="{{ route('login') }}" style="display: grid; gap: 1rem;">
                 @csrf

@@ -9,11 +9,13 @@ use App\Models\Project;
 use App\Models\Skill;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PageController extends Controller
 {
     public function home()
     {
+        // dd(request()->ip());
         return view('home', [
             'hero' => [
                 'headline' => 'Building Scalable Web, Mobile & IoT Solutions',
@@ -179,4 +181,17 @@ class PageController extends Controller
     public function privacy(string $policy){
         return view('privacy',compact('policy'));
     }
+    public function dropboxApi(){
+        $response = Http::withToken('Bearer')->get('');
+    }
 }
+/*
+Building centralized system
+1. gmail int
+2. AI int
+3. Dropbox int
+4. calendar
+5. Notification(Email)
+6. data sync(gmail, dropbox, telegram)
+7. authentication
+*/

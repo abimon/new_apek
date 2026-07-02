@@ -11,6 +11,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,7 +42,7 @@ Route::middleware('guest')->controller(AuthController::class)->group(function ()
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resources([
         'projects'=>AdminProjectController::class,
@@ -52,10 +53,13 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         'career'=>CareerController::class,
         'profile'=>ProfileController::class,
         'users'=>UsersController::class,
+        'shop'=>ShopController::class
     ]);
     Route::get('messages', [AdminMessageController::class, 'index'])->name('messages.index');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home',function(){
+    return redirect('/');
+})->name('home');
