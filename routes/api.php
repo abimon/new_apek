@@ -25,7 +25,7 @@ Route::controller(ShopController::class)->group(function () {
     Route::delete('/products/delete/{id}', 'destroy')->middleware('auth:sanctum');
 });
 Route::controller(OrderController::class)->group(function () {
-    Route::post('/order', 'store');
+    Route::post('/order/store', 'store');
     Route::get('/order/{id}', 'show');
     Route::get('/check-payment-status/{id}', 'check_payment_status');
     Route::post('/payment/v1/callback/{id}', 'callback');
