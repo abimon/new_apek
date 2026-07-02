@@ -49,8 +49,8 @@ class OrderController extends Controller
         }
 
         $order = Order::create($validated);
-        $this->Pay($validated['total'], $validated['payphone'], $validated['order_code']);
-        return response()->json(['message' => 'Order created successfully', 'order_code' => $order->order_code], 201);
+        $this->Pay($validated['total'], str_replace('+', '', $validated['payphone']), $validated['order_code']);
+        return response()->json(['message' => 'Order created successfully','status'=>'success', 'order_code' => $order->order_code], 201);
     }
 
     /**
