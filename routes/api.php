@@ -27,5 +27,6 @@ Route::controller(ShopController::class)->group(function () {
 Route::controller(OrderController::class)->group(function () {
     Route::post('/order', 'store');
     Route::get('/order/{id}', 'show');
+    Route::get('/check-payment-status/{id}', 'check_payment_status');
     Route::post('/payment/v1/callback/{id}', 'callback');
 });

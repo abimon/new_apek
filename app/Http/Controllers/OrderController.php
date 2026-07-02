@@ -53,9 +53,22 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show($code_id)
     {
+        $order = Order::where('order_code', $code_id)->first();
+        if (!$order) {
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+        return response()->json(['order' => $order], 200);
         //
+    }
+    public function check_payment_status($code_id)
+    {
+        $order = Order::where('order_code', $code_id)->first();
+        if (!$order) {
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+        return response()->json(['payment_status' => $order->payment_status], 200);
     }
 
     /**
