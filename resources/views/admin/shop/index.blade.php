@@ -29,10 +29,10 @@
                         <td style="padding: 1rem;">Ksh{{ number_format($product->price, 2) }}</td>
                         <td style="padding: 1rem;"><span class="badge rounded {{ $product->status === 'available' ? 'bg-success' : ($product->status === 'unavailable' ? 'bg-warning' : 'bg-danger') }}">{{ ucfirst($product->status) }}</span></td>
                         <td style="padding: 1rem;">
-                            <a href="{{ route('admin.shop.edit', $product->id) }}" class="btn btn-sm btn-secondary w-75">Edit</a>
+                            <a href="{{ route('admin.shop.edit', ['shop'=>$product]) }}" class="btn btn-sm btn-secondary w-75">Edit</a>
                         </td>
                         <td style="padding: 1rem;">
-                            <form action="{{ route('admin.shop.destroy', $product->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('admin.shop.destroy', ['shop'=>$product]) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger w-75" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>

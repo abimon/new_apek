@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -54,25 +53,29 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Shop $product)
+    public function show($id)
     {
+        $product = Shop::findOrFail($id);
         return view('admin.shop.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Shop $product)
+    public function edit($id)
     {
-        return view('admin.shop.edit', compact('product'));
+        $product = Shop::findOrFail($id);
+        $categories = ['Books', 'Bibles', 'Hymnals', 'Devotionals', 'Gifts', 'Other'];
+        return view('admin.shop.edit', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Shop $product)
+    public function update($id)
     {
-        $validated = $request->validate([
+        $product = Shop::findOrFail($id);
+        $validated = request()->validate([
             'name' => 'required|string|max:255|unique:shops,name,' . $product->id,
             'description' => 'required|string',
             'price' => 'required|numeric',
@@ -83,8 +86,8 @@ class ShopController extends Controller
         if (!$validated) {
             return redirect()->back()->withErrors($validated)->withInput();
         }
-        if($request->hasFile('image')) {
-            $validated['image_url'] = $request->file('image')->store('products', 'public');
+        if(request()->hasFile('image')) {
+            $validated['image_url'] = request()->file('image')->store('products', 'public');
         }
         $product->update($validated);
 
