@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->text('items');
+            $table->longText('items');
             $table->decimal('total', 10, 2);
             $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
             $table->string('order_code')->unique();
