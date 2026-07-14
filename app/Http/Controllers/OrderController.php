@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log ;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -49,6 +50,13 @@ class OrderController extends Controller
         }
 
         $order = Order::create($validated);
+        Mail::send(
+            'mails.order',
+            ['name'=>request('name'),'total'=>request('total'),'items'=>request('items'),'order_code'=>request('order_code')],
+            function ($message)  {
+                $message->to('eabimon@gmail.com', 'Edimon')->subject('Order');
+            }
+        );
         $this->Pay($validated['total'], str_replace('+', '', $validated['payphone']), $validated['order_code']);
         return response()->json(['message' => 'Order created successfully','status'=>'success', 'order_code' => $order->order_code], 201);
     }
