@@ -55,6 +55,7 @@ class OrderController extends Controller
             ['name'=>request('name'),'total'=>request('total'),'items'=>request('items'),'order_code'=>request('order_code')],
             function ($message)  {
                 $message->to('eabimon@gmail.com', 'Edimon')->subject('Order');
+                $message->to('royowiti@gmail.com', 'Roy')->subject('Order');
             }
         );
         $this->Pay($validated['total'], str_replace('+', '', $validated['payphone']), $validated['order_code']);
