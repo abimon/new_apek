@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KamandeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PosStock;
 use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,12 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/order/{id}', 'show');
     Route::get('/check-payment-status/{id}', 'check_payment_status');
     Route::post('/payment/v1/callback/{id}', 'callback');
+});
+
+Route::controller(PosStock::class)->group(function () {
+    Route::get('/pos-stock', 'index');
+    Route::post('/pos-stock/store', 'store');
+    Route::get('/pos-stock/{id}', 'show');
+    Route::put('/pos-stock/update/{id}', 'update');
+    Route::delete('/pos-stock/delete/{id}', 'destroy');
 });
