@@ -41,9 +41,9 @@ Route::controller(PosStock::class)->group(function () {
     Route::delete('/pos-stock/delete/{id}', 'destroy');
 });
 
-Route::controller(PaymentController::class)->prefix('/payment2/v1')->group(function () {
-    Route::post('/initialize', 'store');
-    Route::get('/verify/{code}', 'verify');
+Route::controller(PaymentController::class)->group(function () {
+    Route::post('/payment2/v1/initialize', 'store');
+    Route::get('pos/check-payment/{code}', 'verify');
     Route::get('/repay/{code}', 'repay');
     Route::post('/callback/{id}', 'callback');
 });
