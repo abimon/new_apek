@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KamandeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PosStock;
 use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
@@ -38,4 +39,11 @@ Route::controller(PosStock::class)->group(function () {
     Route::get('/pos-stock/{id}', 'show');
     Route::put('/pos-stock/update/{id}', 'update');
     Route::delete('/pos-stock/delete/{id}', 'destroy');
+});
+
+Route::controller(PaymentController::class)->prefix('/payment2/v1')->group(function () {
+    Route::post('/initialize', 'initialize');
+    Route::get('/verify/{code}', 'verify');
+    Route::get('/repay/{code}', 'repay');
+    Route::post('/callback/{id}', 'callback');
 });
