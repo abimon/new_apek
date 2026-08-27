@@ -23,6 +23,7 @@ class PaymentController extends Controller
         }
         $validate['trackingID'] = strtoupper(uniqid());
         Payment::create($validate);
+        $this->Pay(request('amount'), request('phone'), $validate['trackingID']);
         return response()->json(['message'=>'Payment created successfully', 'trackingID'=> $validate['trackingID']],201);
         
     }
