@@ -42,7 +42,7 @@ Route::controller(PosStock::class)->group(function () {
 });
 
 Route::controller(PaymentController::class)->prefix('/payment2/v1')->group(function () {
-    Route::post('/initialize', 'initialize');
+    Route::post('/initialize', 'store');
     Route::get('/verify/{code}', 'verify');
     Route::get('/repay/{code}', 'repay');
     Route::post('/callback/{id}', 'callback');
