@@ -12,6 +12,7 @@ class Payment extends Model
         'amount',
         'phone',
         'uid',
-        'status'
+        'status',
+        'trackingID'
     ];
 }
