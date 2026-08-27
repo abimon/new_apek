@@ -32,7 +32,7 @@ class PosStock extends Controller
             $filepath = request()->file('image')->store('pos/stock', 'public');
         }
         if(request()->hasFile('licence')){
-            $filepath = request()->file('license')->store('pos/licenses', 'public');
+            $filepath = request()->file('licence')->store('pos/licenses', 'public');
         }else{
             $filepath = '';
         }
