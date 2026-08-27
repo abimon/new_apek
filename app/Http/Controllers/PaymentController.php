@@ -23,7 +23,7 @@ class PaymentController extends Controller
         }
         $validate['trackingID'] = strtoupper(uniqid());
         Payment::create($validate);
-        return response()->json(['message'=>'Payment created successfully', 'trackingID'=> $validate['trackingID']],200);
+        return response()->json(['message'=>'Payment created successfully', 'trackingID'=> $validate['trackingID']],201);
         
     }
     public function generateToken()
