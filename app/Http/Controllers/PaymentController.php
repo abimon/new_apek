@@ -109,6 +109,9 @@ class PaymentController extends Controller
         if (!$payment) {
             return response()->json(['message' => 'Order not found'], 404);
         }
+        if($payment->status == 'paid'){
+            return response()->json(['message' => 'Order already paid'], 404);
+        }
         $phone = request('phone')?? $payment->phone;
         $res = $this->Pay($payment->amount, $phone, $payment->trackingID);
         return response()->json(['message' => 'Payment initiated', 'response' => $res], 200);
