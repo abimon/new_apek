@@ -28,10 +28,23 @@ class PosStock extends Controller
     public function store(Request $request)
     {
         
-        $filepath = request()->file('image')->store('pos/stock', 'public');
-        return response()->json([
-            'filepath' => $filepath
-        ],201);
+        if(request()->hasFile('image')){
+            $filepath = request()->file('image')->store('pos/stock', 'public');
+        }
+        if(request()->hasFile('licence')){
+            $filepath = request()->file('license')->store('pos/licenses', 'public');
+        }else{
+            $filepath = '';
+        }
+        if($filepath!=''){
+            return response()->json([
+                'filepath' => 'https://apektechinc.com/storage/'.$filepath
+            ], 201);
+        }else{
+            return response()->json([
+                'error' => 'No file attached'
+            ], 404);
+        }
     }
 
     /**
