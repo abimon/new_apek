@@ -27,7 +27,7 @@ class PosStock extends Controller
      */
     public function store(Request $request)
     {
-return request();
+return request()->file('image');
         if (request()->hasFile('image')) {
             $filepath = request()->file('image')->store('pos/stock', 'public');
         }
