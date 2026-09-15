@@ -45,5 +45,5 @@ Route::controller(PaymentController::class)->group(function () {
     Route::post('/payment2/v1/initialize', 'store');
     Route::get('pos/check-payment/{code}', 'verify');
     Route::get('/repay/{code}', 'repay');
-    Route::post('/callback/{id}', 'callback');
+    Route::post('/payment2/v1/callback/{id}', 'callback');
 });
