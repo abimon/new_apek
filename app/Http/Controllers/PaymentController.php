@@ -67,7 +67,7 @@ class PaymentController extends Controller
         // if ($amount >= 2) {
         $order = Payment::where('trackingID', $id)->first();
         $order->status = 'paid';
-        $order->save();
+        $order->update();
         Log::channel('mpesaSuccess')->info('Account payment successful for order ID: ' . $id);
         $response = new Response();
         $response->headers->set("Content-Type", "text/xml; charset=utf-8");
