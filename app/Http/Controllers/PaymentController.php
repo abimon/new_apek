@@ -95,7 +95,7 @@ class PaymentController extends Controller
     }
     public function verify($code_id)
     {
-        $payment = MpesaP::where('trackingID', $code_id)->first();
+        $payment = Payment::where('trackingID', $code_id)->first();
         if (!$payment) {
             return response()->json(['message' => 'Order not found'], 404);
         }
