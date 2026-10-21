@@ -1,65 +1,57 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\AdminBlogPostController;
-use App\Http\Controllers\Admin\AdminProjectController;
-use App\Http\Controllers\Admin\AdminSkillController;
-use App\Http\Controllers\Admin\AdminTestimonialController;
-use App\Http\Controllers\Admin\AdminMessageController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CareerController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UsersController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminAuditLogController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminPortfolioReviewController;
+use App\Http\Controllers\AdminPortfolioUserController;
+use App\Http\Controllers\AdminProjectController;
+use App\Http\Controllers\AdminTechStackController;
+use App\Http\Controllers\AdminUserManagementController;
+use App\Http\Controllers\Auth\FirstLoginPasswordController;
+use App\Http\Controllers\PortfolioProfileController;
+use App\Http\Controllers\PortfolioProjectController;
+use App\Http\Controllers\PublicPortfolioController;
+use App\Http\Controllers\PublicSiteController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(PageController::class)->group(function(){
-    Route::get('/', 'home')->name('home');
-    Route::get('/about', 'about')->name('about');
-    Route::get('/skills', 'skills')->name('skills');
-    Route::get('/services', 'services')->name('services');
-    Route::get('/projects', 'projects')->name('projects');
-    Route::get('/projects/{slug}', 'project')->name('project.show');
-    Route::get('/blog', 'blog')->name('blog');
-    Route::get('/blog/{slug}', 'blogPost')->name('blog.post');
-    Route::get('/contact', 'contact')->name('contact');
-    Route::post('/contact', 'sendContact')->name('contact.send');
-    Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
-    Route::get('/downloads', 'downloads')->name('downloads');
-    Route::get('/privacy-policy/{company}','privacy')->name('privacy');
+Route::get('/', [PublicSiteController::class, 'home'])->name('home');
+Route::get('/work/{project:slug}', [PublicSiteController::class, 'project'])->name('projects.show');
+Route::get('/portfolio/{slug}', [PublicPortfolioController::class, 'show'])->name('portfolio.public');
+Route::get('/portfolio/{slug}/cv.pdf', [PublicPortfolioController::class, 'cv'])->name('portfolio.cv');
+Route::get('/robots.txt', [PublicSiteController::class, 'robots'])->name('robots');
+Route::get('/sitemap.xml', [PublicSiteController::class, 'sitemap'])->name('sitemap');
+Route::post('/contact', [PublicSiteController::class, 'inquiry'])->middleware('throttle:contact')->name('contact.store');
 
+Route::middleware(['audit.sensitive', 'auth', 'role:admin,superadmin'])->group(function () {
+    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::patch('dashboard/inquiries/{inquiry}/read', [AdminDashboardController::class, 'markInquiryRead'])->name('admin.inquiries.read');
+    Route::resource('admin/projects', AdminProjectController::class)->except(['show'])->names('admin.projects');
+    Route::resource('admin/categories', AdminCategoryController::class)->except(['show'])->names('admin.categories');
+    Route::resource('admin/tech-stacks', AdminTechStackController::class)->except(['show'])->names('admin.tech-stacks');
 });
 
-Route::middleware('guest')->controller(AuthController::class)->group(function () {
-    Route::get('/login', 'showLoginForm')->name('login');
-    Route::post('/login', 'login');
-    Route::get('/register', 'showRegisterForm')->name('register');
-    Route::post('/register',  'register');
+Route::middleware(['audit.sensitive', 'auth', 'role:superadmin'])->group(function () {
+    Route::get('admin/users', [AdminUserManagementController::class, 'index'])->name('admin.users.index');
+    Route::patch('admin/users/{user}/access', [AdminUserManagementController::class, 'updateAccess'])->name('admin.users.access');
+    Route::get('admin/audit-logs', [AdminAuditLogController::class, 'index'])->name('admin.audit-logs.index');
+    Route::get('admin/portfolio-users', [AdminPortfolioUserController::class, 'index'])->name('admin.portfolio-users.index');
+    Route::post('admin/portfolio-users', [AdminPortfolioUserController::class, 'store'])->name('admin.portfolio-users.store');
+    Route::get('admin/portfolio-projects', [AdminPortfolioReviewController::class, 'index'])->name('admin.portfolio-projects.index');
+    Route::patch('admin/portfolio-projects/{project}/approve', [AdminPortfolioReviewController::class, 'approve'])->name('admin.portfolio-projects.approve');
+    Route::patch('admin/portfolio-projects/{project}/reject', [AdminPortfolioReviewController::class, 'reject'])->name('admin.portfolio-projects.reject');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
-
-Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::resources([
-        'projects'=>AdminProjectController::class,
-        'skills'=>AdminSkillController::class,
-        'blog-posts'=>AdminBlogPostController::class,
-        'testimonials'=>AdminTestimonialController::class,
-        'product'=>ProductController::class,
-        'career'=>CareerController::class,
-        'profile'=>ProfileController::class,
-        'users'=>UsersController::class,
-        'shop'=>ShopController::class
-    ]);
-    Route::get('messages', [AdminMessageController::class, 'index'])->name('messages.index');
+Route::middleware('auth')->group(function () {
+    Route::get('password/first-login', [FirstLoginPasswordController::class, 'edit'])->name('password.first-login.edit');
+    Route::put('password/first-login', [FirstLoginPasswordController::class, 'update'])->middleware('audit.sensitive')->name('password.first-login.update');
 });
 
-Auth::routes();
+Route::middleware(['audit.sensitive', 'auth', 'portfolio.enabled'])->prefix('settings/portfolio')->name('portfolio.')->group(function () {
+    Route::get('/', [PortfolioProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/', [PortfolioProfileController::class, 'update'])->middleware('throttle:30,1')->name('profile.update');
+    Route::resource('projects', PortfolioProjectController::class)->except(['show'])->names('projects')->middleware('throttle:30,1');
+});
 
-Route::get('/home',function(){
-    return redirect('/');
-})->name('home');
+require __DIR__.'/settings.php';
+require __DIR__.'/auth.php';
