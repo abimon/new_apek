@@ -21,30 +21,30 @@ type Project = {
 };
 
 export default function ProjectShow({ project, relatedProjects, canonicalUrl }: { project: Project; relatedProjects: Project[]; canonicalUrl: string }) {
-    const description = `${project.title}: ${project.summary} ApekTech software engineering case study from Kenya.`;
+    const description = `${project.title}: ${project.summary} APEK Technologies software engineering case study from Kenya.`;
     const projectSchema = {
         '@context': 'https://schema.org',
         '@type': 'CreativeWork',
         name: project.title,
         description,
         url: canonicalUrl,
-        creator: { '@type': 'Organization', name: 'ApekTech', url: route('home') },
+        creator: { '@type': 'Organization', name: 'APEK Technologies', url: route('home') },
         keywords: project.tech_stacks.map((stack) => stack.name).join(', '),
         about: project.categories.map((category) => category.name),
     };
 
     return (
         <>
-            <Head title={`${project.title} | ApekTech Kenya case study`}>
+            <Head title={`${project.title} | APEK Technologies Kenya case study`}>
                 <meta name="description" content={description} />
                 <meta property="og:type" content="article" />
-                <meta property="og:site_name" content="ApekTech" />
+                <meta property="og:site_name" content="APEK Technologies" />
                 <meta property="og:locale" content="en_KE" />
-                <meta property="og:title" content={`${project.title} | ApekTech Kenya case study`} />
+                <meta property="og:title" content={`${project.title} | APEK Technologies Kenya case study`} />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={canonicalUrl} />
                 <meta name="twitter:card" content="summary" />
-                <meta name="twitter:title" content={`${project.title} | ApekTech Kenya case study`} />
+                <meta name="twitter:title" content={`${project.title} | APEK Technologies Kenya case study`} />
                 <meta name="twitter:description" content={description} />
                 <link rel="canonical" href={canonicalUrl} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema).replace(/</g, '\\u003c') }} />
@@ -71,7 +71,7 @@ export default function ProjectShow({ project, relatedProjects, canonicalUrl }: 
                                 <div className="mt-8 flex flex-wrap gap-2">{project.tech_stacks.map((stack) => <span className="border border-slate-500 px-3 py-2 text-xs font-semibold text-slate-200" key={stack.slug}>{stack.name}</span>)}</div>
                             </div>
                             <div className="border-l border-slate-600 pl-7">
-                                <p className="text-xs tracking-widest text-slate-400 uppercase">{project.project_type === 'product' ? 'ApekTech product' : 'Client'}</p>
+                                <p className="text-xs tracking-widest text-slate-400 uppercase">{project.project_type === 'product' ? 'APEK Technologies product' : 'Client'}</p>
                                 {project.project_type === 'client' && <p className="mt-2 text-lg font-semibold">{project.client || 'Confidential partner'}</p>}
                                 {project.live_url && <a href={project.live_url} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#D4A373] hover:text-white">{project.project_type === 'product' ? 'Open product' : 'Visit live project'} <ExternalLink size={15} /></a>}
                             </div>
@@ -92,7 +92,7 @@ export default function ProjectShow({ project, relatedProjects, canonicalUrl }: 
                     <section className="border-y border-[#CBD5E1] bg-[#E8EEF3]"><div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-2 lg:px-8"><div><p className="label">What changed</p><h2 className="section-title">Outcomes that hold up in the real world.</h2><div className="mt-8 grid gap-4 sm:grid-cols-2">{(project.outcomes || []).map((outcome) => <div className="border border-[#CBD5E1] bg-white p-5 text-lg font-semibold" key={outcome}>{outcome}</div>)}</div></div><div><p className="label">Built into the product</p><div className="mt-6 space-y-4">{(project.features || []).map((feature) => <div className="flex items-center gap-3 border-b border-[#CBD5E1] pb-4 text-sm font-medium" key={feature}><Check size={17} className="text-[#C07A50]" />{feature}</div>)}</div></div></div></section>
                     {relatedProjects.length > 0 && <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="flex items-end justify-between gap-5"><div><p className="label">Keep exploring</p><h2 className="section-title">More selected work.</h2></div><Link href={`${route('home')}#work`} className="hidden items-center gap-2 text-sm font-semibold text-[#C07A50] sm:flex">View all work <ArrowUpRight size={16} /></Link></div><div className="mt-8 grid gap-5 md:grid-cols-3">{relatedProjects.map((related) => <Link href={route('projects.show', related.slug)} className="group border border-[#CBD5E1] bg-white p-6 hover:border-[#C07A50]" key={related.id}><span className="text-xs font-bold tracking-widest text-slate-400 uppercase">{related.categories[0]?.name}</span><h3 className="mt-12 text-2xl font-semibold tracking-tight group-hover:text-[#C07A50]">{related.title}</h3><p className="mt-3 text-sm leading-6 text-slate-500">{related.summary}</p></Link>)}</div></section>}
                 </main>
-                <footer className="border-t border-[#CBD5E1] px-5 py-8 text-center text-xs text-slate-500">(c) 2026 ApekTech. Built for the long run.</footer>
+                <footer className="border-t border-[#CBD5E1] px-5 py-8 text-center text-xs text-slate-500">(c) 2026 APEK Technologies. Built for the long run.</footer>
             </div>
         </>
     );

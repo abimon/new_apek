@@ -43,11 +43,11 @@ export default function Welcome({ projects, categories, activeCategory, canonica
             {errors[key] && <span className="mt-1 block text-xs text-[#F4B5A9]">{errors[key]}</span>}
         </label>
     );
-    const description = 'ApekTech is a Kenya-focused software engineering studio building reliable web applications, APIs, mobile products, and business systems for ambitious teams.';
+    const description = 'APEK Technologies is a Kenya-focused software engineering studio building reliable web applications, APIs, mobile products, and business systems for ambitious teams.';
     const organizationSchema = {
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
-        name: 'ApekTech',
+        name: 'APEK Technologies',
         url: canonicalUrl,
         description,
         areaServed: [{ '@type': 'Country', name: 'Kenya' }, { '@type': 'Place', name: 'East Africa' }],
@@ -57,20 +57,20 @@ export default function Welcome({ projects, categories, activeCategory, canonica
 
     return (
         <>
-            <Head title="ApekTech | Software Engineering Studio in Kenya">
+            <Head title="APEK Technologies | Software Engineering Studio in Kenya">
                 <meta name="description" content={description} />
                 <meta
                     name="keywords"
                     content="software development Kenya, web application development Nairobi, Laravel developers Kenya, React development Kenya, API development East Africa"
                 />
                 <meta property="og:type" content="website" />
-                <meta property="og:site_name" content="ApekTech" />
+                <meta property="og:site_name" content="APEK Technologies" />
                 <meta property="og:locale" content="en_KE" />
-                <meta property="og:title" content="ApekTech | Software Engineering Studio in Kenya" />
+                <meta property="og:title" content="APEK Technologies | Software Engineering Studio in Kenya" />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={canonicalUrl} />
                 <meta name="twitter:card" content="summary" />
-                <meta name="twitter:title" content="ApekTech | Software Engineering Studio in Kenya" />
+                <meta name="twitter:title" content="APEK Technologies | Software Engineering Studio in Kenya" />
                 <meta name="twitter:description" content={description} />
                 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -127,7 +127,7 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                                     Software that makes <span className="text-[#D4A373]">complex work</span> feel simple.
                                 </h1>
                                 <p className="mt-8 max-w-xl text-lg leading-8 text-slate-300">
-                                    ApekTech partners with ambitious teams in Kenya and across East Africa to design, build, and evolve digital
+                                    APEK Technologies partners with ambitious teams in Kenya and across East Africa to design, build, and evolve digital
                                     products that earn their place in the everyday.
                                 </p>
                                 <div className="mt-10 flex flex-wrap gap-4">
@@ -204,7 +204,7 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                                             <div className="relative z-10 w-full border border-white/70 bg-white/80 p-4 backdrop-blur">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-xs font-bold tracking-widest text-slate-500 uppercase">
-                                                        {project.project_type === 'product' ? 'ApekTech product' : project.client}
+                                                        {project.project_type === 'product' ? 'APEK Technologies product' : project.client}
                                                     </span>
                                                     <ArrowUpRight size={18} style={{ color: project.accent }} />
                                                 </div>
@@ -268,19 +268,19 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                     </section>
                     <section id="about" className="mx-auto grid max-w-7xl gap-14 px-5 py-24 lg:grid-cols-[1fr_1fr] lg:px-8">
                         <div>
-                            <p className="label">About ApekTech</p>
+                            <p className="label">About APEK Tech</p>
                             <h2 className="section-title">Senior thinking, close collaboration.</h2>
                         </div>
                         <div className="text-lg leading-8 text-slate-600">
                             <p>
-                                We are a Kenya-focused, senior-led software studio for companies whose work is too important for a throwaway solution.
+                                We are a Kenya-focused, senior-led software and hardware studio for companies whose work is too important for a throwaway solution.
                             </p>
                             <p className="mt-6">
-                                Our founder, Apek, brings a full-stack engineering lens to architecture, APIs, scaling, and cross-platform product
-                                delivery. The result is software that feels considered now and remains adaptable later.
+                                Our founder, Edimon, brings a full-stack engineering lens to architecture, APIs, scaling, and cross-platform product
+                                delivery. The result is software/hardware that feels considered now and remains adaptable later.
                             </p>
                             <div className="mt-8 flex flex-wrap gap-3">
-                                {['Laravel', 'React', 'TypeScript', 'PostgreSQL', 'AWS', 'Product strategy'].map((item) => (
+                                {['Laravel','MySQL','Flutter','Firebase','React', 'TypeScript', 'PostgreSQL', 'AWS', 'Product strategy','Embedded C','Micropython'].map((item) => (
                                     <span className="border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-semibold" key={item}>
                                         {item}
                                     </span>
@@ -298,7 +298,7 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                                     throughout East Africa. We will reply within one business day.
                                 </p>
                                 <div className="mt-10 flex items-center gap-3 text-sm text-slate-300">
-                                    <Mail size={17} className="text-[#D4A373]" /> hello@apektech.com
+                                    <Mail size={17} className="text-[#D4A373]" /> hello@APEK Technologies.com
                                 </div>
                             </div>
                             <form onSubmit={submit} className="grid gap-5 sm:grid-cols-2">
@@ -334,7 +334,7 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                     </section>
                 </main>
                 <footer className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-                    <span>&copy; 2022 - {new Date().getFullYear()} ApekTech. Built for the long run.</span>
+                    <span>&copy; 2022 - {new Date().getFullYear()} APEK Tech. Built for the long run.</span>
                     <span>Software engineering - Product systems - Thoughtful delivery</span>
                 </footer>
             </div>

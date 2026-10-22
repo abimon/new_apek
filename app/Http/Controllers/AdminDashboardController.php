@@ -7,12 +7,14 @@ use App\Models\ContactInquiry;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class AdminDashboardController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
+        if(!$request->user()->can('view dashboard')) {
+            return redirect()->route('portfolio.profile.edit');
+        }
         $start = now()->subDays(6)->startOfDay();
         $views = AnalyticsLog::query()->where('visited_at', '>=', $start)->selectRaw('DATE(visited_at) as day, COUNT(*) as views, COUNT(DISTINCT session_hash) as visitors')->groupBy('day')->orderBy('day')->get();
 

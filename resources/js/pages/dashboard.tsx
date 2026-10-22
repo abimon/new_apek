@@ -27,7 +27,7 @@ export default function Dashboard({
                 <div className="mx-auto max-w-7xl">
                     <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
                         <div>
-                            <p className="text-xs font-bold tracking-[.2em] text-[#C07A50] uppercase">ApekTech CMS</p>
+                            <p className="text-xs font-bold tracking-[.2em] text-[#C07A50] uppercase">APEK Tech CMS</p>
                             <h1 className="mt-2 text-3xl font-semibold tracking-tight">Good {greeting}, here is the signal.</h1>
                         </div>
                         <div className="flex flex-wrap gap-4">
