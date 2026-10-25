@@ -3,7 +3,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Boxes, FolderKanban, LayoutGrid, ScrollText, Tags } from 'lucide-react';
+import { Boxes, FolderKanban, LayoutGrid, MessageCircle, Newspaper, ScrollText, Tags } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -16,6 +16,16 @@ const mainNavItems: NavItem[] = [
         title: 'Projects',
         url: '/admin/projects',
         icon: FolderKanban,
+    },
+    {
+        title: 'Blog posts',
+        url: '/admin/blog',
+        icon: Newspaper,
+    },
+    {
+        title: 'Blog comments',
+        url: '/admin/blog-comments',
+        icon: MessageCircle,
     },
     {
         title: 'Categories',
@@ -55,7 +65,7 @@ export function AppSidebar() {
                     { title: 'Project approvals', url: '/admin/portfolio-projects', icon: FolderKanban },
                     { title: 'Audit logs', url: '/admin/audit-logs', icon: ScrollText },
                 ]
-              : adminNavItems;
+              : adminNavItems.filter((item) => !item.url.startsWith('/admin/blog'));
 
     return (
         <Sidebar collapsible="icon" variant="inset">

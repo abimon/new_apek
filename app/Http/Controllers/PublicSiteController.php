@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactInquiryRequest;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\ContactInquiry;
 use App\Models\Project;
@@ -85,6 +86,8 @@ class PublicSiteController extends Controller
     {
         $urls = collect([
             ['loc' => URL::route('home'), 'lastmod' => null],
+            ['loc' => URL::route('projects.index'), 'lastmod' => null],
+            ['loc' => URL::route('blog.index'), 'lastmod' => null],
             ['loc' => URL::route('about'), 'lastmod' => null],
             ['loc' => URL::route('services'), 'lastmod' => null],
             ['loc' => URL::route('contact'), 'lastmod' => null],
@@ -100,6 +103,9 @@ class PublicSiteController extends Controller
             ->map(fn (User $user) => [
                 'loc' => URL::route('portfolio.public', $user->portfolio_slug),
                 'lastmod' => $user->updated_at?->toDateString(),
+            ]))->concat(BlogPost::query()->visible()->get(['slug', 'updated_at'])->map(fn (BlogPost $post) => [
+                'loc' => URL::route('blog.show', $post->slug),
+                'lastmod' => $post->updated_at?->toDateString(),
             ]));
 
         return response()->view('sitemap', ['urls' => $urls])->header('Content-Type', 'application/xml; charset=UTF-8');

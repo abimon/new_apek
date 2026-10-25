@@ -18,13 +18,24 @@ type Project = {
 type Category = { id: number; name: string; slug: string };
 
 const nav = [
-    ['Work', '#work'],
+    ['Projects', '/projects'],
+    ['Blog', '/blog'],
     ['Services', '/services'],
     ['About', '/about'],
     ['Contact', '/contact'],
 ];
 
-export default function Welcome({ projects, categories, activeCategory, canonicalUrl }: { projects: Project[]; categories: Category[]; activeCategory: string; canonicalUrl: string }) {
+export default function Welcome({
+    projects,
+    categories,
+    activeCategory,
+    canonicalUrl,
+}: {
+    projects: Project[];
+    categories: Category[];
+    activeCategory: string;
+    canonicalUrl: string;
+}) {
     const { flash } = usePage<{ flash?: { success?: string } }>().props;
     const [menuOpen, setMenuOpen] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({ name: '', email: '', company: '', service: '', message: '' });
@@ -44,16 +55,20 @@ export default function Welcome({ projects, categories, activeCategory, canonica
             {errors[key] && <span className="mt-1 block text-xs text-[#F4B5A9]">{errors[key]}</span>}
         </label>
     );
-    const description = 'APEK Technologies is a Kenya-focused software engineering studio building reliable web applications, APIs, mobile products, and business systems for ambitious teams.';
+    const description =
+        'APEK Technologies is a Kenya-focused software engineering studio building reliable web applications, APIs, mobile products, and business systems for ambitious teams.';
     const organizationSchema = {
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
         name: 'APEK Technologies',
         url: canonicalUrl,
         description,
-        areaServed: [{ '@type': 'Country', name: 'Kenya' }, { '@type': 'Place', name: 'East Africa' }],
+        areaServed: [
+            { '@type': 'Country', name: 'Kenya' },
+            { '@type': 'Place', name: 'East Africa' },
+        ],
         serviceType: ['Software engineering', 'Web application development', 'API development', 'Mobile app development', 'Business systems'],
-        knowsAbout: ['Laravel', 'React', 'TypeScript', 'PostgreSQL','MySQL', 'Cloud architecture'],
+        knowsAbout: ['Laravel', 'React', 'TypeScript', 'PostgreSQL', 'MySQL', 'Cloud architecture'],
     };
 
     return (
@@ -129,8 +144,8 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                                     Software that makes <span className="text-[#D4A373]">complex work</span> feel simple.
                                 </h1>
                                 <p className="mt-8 max-w-xl text-lg leading-8 text-slate-300">
-                                    APEK Technologies partners with ambitious teams in Kenya and across East Africa to design, build, and evolve digital
-                                    products that earn their place in the everyday.
+                                    APEK Technologies partners with ambitious teams in Kenya and across East Africa to design, build, and evolve
+                                    digital products that earn their place in the everyday.
                                 </p>
                                 <div className="mt-10 flex flex-wrap gap-4">
                                     <a
@@ -275,14 +290,27 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                         </div>
                         <div className="text-lg leading-8 text-slate-600">
                             <p>
-                                We are a Kenya-focused, senior-led software and hardware studio for companies whose work is too important for a throwaway solution.
+                                We are a Kenya-focused, senior-led software and hardware studio for companies whose work is too important for a
+                                throwaway solution.
                             </p>
                             <p className="mt-6">
                                 Our founder, Edimon, brings a full-stack engineering lens to architecture, APIs, scaling, and cross-platform product
                                 delivery. The result is software/hardware that feels considered now and remains adaptable later.
                             </p>
                             <div className="mt-8 flex flex-wrap gap-3">
-                                {['Laravel','MySQL','Flutter','Firebase','React', 'TypeScript', 'PostgreSQL', 'AWS', 'Product strategy','Embedded C','Micropython'].map((item) => (
+                                {[
+                                    'Laravel',
+                                    'MySQL',
+                                    'Flutter',
+                                    'Firebase',
+                                    'React',
+                                    'TypeScript',
+                                    'PostgreSQL',
+                                    'AWS',
+                                    'Product strategy',
+                                    'Embedded C',
+                                    'Micropython',
+                                ].map((item) => (
                                     <span className="border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-semibold" key={item}>
                                         {item}
                                     </span>
@@ -299,7 +327,10 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                                     Tell us a little about what you are trying to make better. We work with teams in Nairobi, across Kenya, and
                                     throughout East Africa. We will reply within one business day.
                                 </p>
-                                <Link href={route('contact')} className="mt-10 inline-flex items-center gap-3 text-sm text-slate-300 hover:text-white">
+                                <Link
+                                    href={route('contact')}
+                                    className="mt-10 inline-flex items-center gap-3 text-sm text-slate-300 hover:text-white"
+                                >
                                     <Mail size={17} className="text-[#D4A373]" /> Contact APEK Technologies
                                 </Link>
                             </div>
@@ -338,9 +369,15 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                 <footer className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
                     <span>&copy; 2022 - {new Date().getFullYear()} APEK Tech. Built for the long run.</span>
                     <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 gap-y-2">
-                        <Link href={route('about')} className="hover:text-[#C07A50]">About</Link>
-                        <Link href={route('services')} className="hover:text-[#C07A50]">Services</Link>
-                        <Link href={route('contact')} className="hover:text-[#C07A50]">Contact</Link>
+                        <Link href={route('about')} className="hover:text-[#C07A50]">
+                            About
+                        </Link>
+                        <Link href={route('services')} className="hover:text-[#C07A50]">
+                            Services
+                        </Link>
+                        <Link href={route('contact')} className="hover:text-[#C07A50]">
+                            Contact
+                        </Link>
                     </nav>
                 </footer>
             </div>

@@ -28,6 +28,7 @@ The migration `2026_09_15_000001_create_portfolio_tables` creates indexed, forei
 
 ## Production hardening
 
+- Public work is available at `/projects`; blog posts are managed by superadmins at `/admin/blog`, with visual authoring, draft and scheduled publication, categories, tags, SEO metadata, and cover images. Anonymous blog comments are rate-limited and remain private until approved in `/admin/blog-comments`.
 - Run behind TLS, set `SESSION_SECURE_COOKIE=true`, use a database or Redis session driver, and configure a trusted proxy.
 - Send HSTS (`max-age=63072000; includeSubDomains; preload`), `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, and `X-XSS-Protection: 1; mode=block` on responses. Laravel applies these to application responses; Apache's `mod_headers` configuration in `public/.htaccess` also covers static files. Ensure any CDN or alternate web server sends the same headers.
 - The HSTS `preload` directive opts in to preload eligibility but does not add the domain to browser preload lists. After confirming the apex domain and all subdomains are HTTPS-only, submit the domain at [hstspreload.org](https://hstspreload.org/). Preloading is difficult to reverse and can take time to be removed from browser releases.

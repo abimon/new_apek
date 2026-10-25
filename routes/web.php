@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminAuditLogController;
+use App\Http\Controllers\AdminBlogCommentController;
+use App\Http\Controllers\AdminBlogPostController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPortfolioReviewController;
@@ -11,7 +13,9 @@ use App\Http\Controllers\AdminUserManagementController;
 use App\Http\Controllers\Auth\FirstLoginPasswordController;
 use App\Http\Controllers\PortfolioProfileController;
 use App\Http\Controllers\PortfolioProjectController;
+use App\Http\Controllers\PublicBlogController;
 use App\Http\Controllers\PublicPortfolioController;
+use App\Http\Controllers\PublicProjectsController;
 use App\Http\Controllers\PublicSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +23,10 @@ Route::get('/', [PublicSiteController::class, 'home'])->name('home');
 Route::get('/about', [PublicSiteController::class, 'about'])->name('about');
 Route::get('/services', [PublicSiteController::class, 'services'])->name('services');
 Route::get('/contact', [PublicSiteController::class, 'contact'])->name('contact');
+Route::get('/projects', [PublicProjectsController::class, 'index'])->name('projects.index');
+Route::get('/blog', [PublicBlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post:slug}', [PublicBlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/{post:slug}/comments', [PublicBlogController::class, 'comment'])->middleware('throttle:3,10')->name('blog.comments.store');
 Route::get('/work/{project:slug}', [PublicSiteController::class, 'project'])->name('projects.show');
 Route::get('/portfolio/{slug}', [PublicPortfolioController::class, 'show'])->name('portfolio.public');
 Route::get('/portfolio/{slug}/cv.pdf', [PublicPortfolioController::class, 'cv'])->name('portfolio.cv');
@@ -33,6 +41,10 @@ Route::middleware(['audit.sensitive', 'auth'])->group(function () {
 Route::middleware(['audit.sensitive', 'auth', 'role:superadmin'])->group(function () {
     Route::patch('dashboard/inquiries/{inquiry}/read', [AdminDashboardController::class, 'markInquiryRead'])->name('admin.inquiries.read');
     Route::resource('admin/projects', AdminProjectController::class)->except(['show'])->names('admin.projects');
+    Route::resource('admin/blog', AdminBlogPostController::class)->except(['show'])->parameters(['blog' => 'post'])->names('admin.blog');
+    Route::get('admin/blog-comments', [AdminBlogCommentController::class, 'index'])->name('admin.blog-comments.index');
+    Route::patch('admin/blog-comments/{comment}/approval', [AdminBlogCommentController::class, 'toggleApproval'])->name('admin.blog-comments.approval');
+    Route::delete('admin/blog-comments/{comment}', [AdminBlogCommentController::class, 'destroy'])->name('admin.blog-comments.destroy');
     Route::resource('admin/categories', AdminCategoryController::class)->except(['show'])->names('admin.categories');
     Route::resource('admin/tech-stacks', AdminTechStackController::class)->except(['show'])->names('admin.tech-stacks');
     Route::get('admin/users', [AdminUserManagementController::class, 'index'])->name('admin.users.index');
@@ -59,7 +71,6 @@ Route::middleware(['audit.sensitive', 'auth', 'portfolio.enabled'])->prefix('set
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
-
-Route::get('/password', function(){
+Route::get('/password', function () {
     return bcrypt('@Admin!2345');
 });
