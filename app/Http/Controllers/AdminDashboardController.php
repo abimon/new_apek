@@ -12,7 +12,7 @@ class AdminDashboardController extends Controller
 {
     public function index(Request $request)
     {
-        if(!$request->user()->can('view dashboard')) {
+        if(!$request->user()->role!= 'superadmin') {
             return redirect()->route('portfolio.profile.edit');
         }
         $start = now()->subDays(6)->startOfDay();

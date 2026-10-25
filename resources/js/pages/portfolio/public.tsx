@@ -1,5 +1,5 @@
-import { ArrowUpRight, Download, Github, Linkedin, MapPin } from 'lucide-react';
 import PublicPageMeta from '@/components/public-page-meta';
+import { ArrowUpRight, Download, Github, Linkedin, MapPin } from 'lucide-react';
 
 type Profile = {
     name: string;
@@ -49,7 +49,17 @@ type Project = {
     categories: string[];
     tech_stacks: string[];
 };
-export default function PublicPortfolio({ profile, projects, cvUrl, canonicalUrl }: { profile: Profile; projects: Project[]; cvUrl: string; canonicalUrl: string }) {
+export default function PublicPortfolio({
+    profile,
+    projects,
+    cvUrl,
+    canonicalUrl,
+}: {
+    profile: Profile;
+    projects: Project[];
+    cvUrl: string;
+    canonicalUrl: string;
+}) {
     const title = `${profile.name} | ${profile.professional_title || 'Professional Portfolio'} | APEK Technologies`;
     const description = (profile.portfolio_summary || `${profile.name}'s professional portfolio at APEK Technologies.`).slice(0, 160);
     const schema = {
