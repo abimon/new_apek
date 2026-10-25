@@ -19,8 +19,9 @@ type Category = { id: number; name: string; slug: string };
 
 const nav = [
     ['Work', '#work'],
-    ['Approach', '#approach'],
-    ['About', '#about'],
+    ['Services', '/services'],
+    ['About', '/about'],
+    ['Contact', '/contact'],
 ];
 
 export default function Welcome({ projects, categories, activeCategory, canonicalUrl }: { projects: Project[]; categories: Category[]; activeCategory: string; canonicalUrl: string }) {
@@ -59,6 +60,7 @@ export default function Welcome({ projects, categories, activeCategory, canonica
         <>
             <Head title="APEK Technologies | Software Engineering Studio in Kenya">
                 <meta name="description" content={description} />
+                <meta name="robots" content="index, follow, max-image-preview:large" />
                 <meta
                     name="keywords"
                     content="software development Kenya, web application development Nairobi, Laravel developers Kenya, React development Kenya, API development East Africa"
@@ -91,13 +93,13 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                         </Link>
                         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
                             {nav.map(([label, href]) => (
-                                <a key={href} href={href} className="transition-colors hover:text-[#C07A50]">
+                                <Link key={href} href={href} className="transition-colors hover:text-[#C07A50]">
                                     {label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
                         <a
-                            href="#contact"
+                            href={route('contact')}
                             className="hidden items-center gap-2 bg-[#2C3E50] px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 sm:flex"
                         >
                             Start a conversation <ArrowUpRight size={16} />
@@ -109,9 +111,9 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                     {menuOpen && (
                         <nav className="border-t border-[#CBD5E1] bg-[#F4F7F9] px-5 py-5 sm:hidden">
                             {nav.map(([label, href]) => (
-                                <a onClick={() => setMenuOpen(false)} key={href} href={href} className="block py-2 font-medium">
+                                <Link onClick={() => setMenuOpen(false)} key={href} href={href} className="block py-2 font-medium">
                                     {label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
                     )}
@@ -297,9 +299,9 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                                     Tell us a little about what you are trying to make better. We work with teams in Nairobi, across Kenya, and
                                     throughout East Africa. We will reply within one business day.
                                 </p>
-                                <div className="mt-10 flex items-center gap-3 text-sm text-slate-300">
-                                    <Mail size={17} className="text-[#D4A373]" /> hello@APEK Technologies.com
-                                </div>
+                                <Link href={route('contact')} className="mt-10 inline-flex items-center gap-3 text-sm text-slate-300 hover:text-white">
+                                    <Mail size={17} className="text-[#D4A373]" /> Contact APEK Technologies
+                                </Link>
                             </div>
                             <form onSubmit={submit} className="grid gap-5 sm:grid-cols-2">
                                 {field('name', 'Your name')}
@@ -335,7 +337,11 @@ export default function Welcome({ projects, categories, activeCategory, canonica
                 </main>
                 <footer className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
                     <span>&copy; 2022 - {new Date().getFullYear()} APEK Tech. Built for the long run.</span>
-                    <span>Software engineering - Product systems - Thoughtful delivery</span>
+                    <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 gap-y-2">
+                        <Link href={route('about')} className="hover:text-[#C07A50]">About</Link>
+                        <Link href={route('services')} className="hover:text-[#C07A50]">Services</Link>
+                        <Link href={route('contact')} className="hover:text-[#C07A50]">Contact</Link>
+                    </nav>
                 </footer>
             </div>
         </>

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreContactInquiryRequest;
 use App\Models\Category;
 use App\Models\ContactInquiry;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
@@ -35,6 +36,27 @@ class PublicSiteController extends Controller
         return back()->with('success', 'Thanks for reaching out. We will be in touch within one business day.');
     }
 
+    public function about(): Response
+    {
+        return Inertia::render('about', [
+            'canonicalUrl' => URL::route('about'),
+        ]);
+    }
+
+    public function services(): Response
+    {
+        return Inertia::render('services', [
+            'canonicalUrl' => URL::route('services'),
+        ]);
+    }
+
+    public function contact(): Response
+    {
+        return Inertia::render('contact', [
+            'canonicalUrl' => URL::route('contact'),
+        ]);
+    }
+
     public function project(Project $project): Response
     {
         abort_unless($project->is_published, 404);
@@ -62,11 +84,23 @@ class PublicSiteController extends Controller
     public function sitemap(): HttpResponse
     {
         $urls = collect([
-            ['loc' => URL::route('home'), 'lastmod' => now()->toDateString()],
+            ['loc' => URL::route('home'), 'lastmod' => null],
+            ['loc' => URL::route('about'), 'lastmod' => null],
+            ['loc' => URL::route('services'), 'lastmod' => null],
+            ['loc' => URL::route('contact'), 'lastmod' => null],
         ])->concat(Project::query()->where('is_published', true)->get(['slug', 'updated_at'])->map(fn (Project $project) => [
             'loc' => URL::route('projects.show', $project),
             'lastmod' => $project->updated_at?->toDateString(),
-        ]));
+        ]))->concat(User::query()
+            ->where('is_active', true)
+            ->where('portfolio_enabled', true)
+            ->where('portfolio_is_public', true)
+            ->whereNotNull('portfolio_slug')
+            ->get(['portfolio_slug', 'updated_at'])
+            ->map(fn (User $user) => [
+                'loc' => URL::route('portfolio.public', $user->portfolio_slug),
+                'lastmod' => $user->updated_at?->toDateString(),
+            ]));
 
         return response()->view('sitemap', ['urls' => $urls])->header('Content-Type', 'application/xml; charset=UTF-8');
     }

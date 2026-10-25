@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react';
 import { ArrowUpRight, Download, Github, Linkedin, MapPin } from 'lucide-react';
+import PublicPageMeta from '@/components/public-page-meta';
 
 type Profile = {
     name: string;
@@ -49,13 +49,27 @@ type Project = {
     categories: string[];
     tech_stacks: string[];
 };
-export default function PublicPortfolio({ profile, projects, cvUrl }: { profile: Profile; projects: Project[]; cvUrl: string }) {
+export default function PublicPortfolio({ profile, projects, cvUrl, canonicalUrl }: { profile: Profile; projects: Project[]; cvUrl: string; canonicalUrl: string }) {
+    const title = `${profile.name} | ${profile.professional_title || 'Professional Portfolio'} | APEK Technologies`;
+    const description = (profile.portfolio_summary || `${profile.name}'s professional portfolio at APEK Technologies.`).slice(0, 160);
+    const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        name: title,
+        description,
+        url: canonicalUrl,
+        mainEntity: {
+            '@type': 'Person',
+            name: profile.name,
+            jobTitle: profile.professional_title || undefined,
+            description: profile.portfolio_summary || undefined,
+            url: canonicalUrl,
+        },
+    };
+
     return (
         <>
-            <Head title={`${profile.name} · ${profile.professional_title || 'Portfolio'}`}>
-                <meta name="description" content={profile.portfolio_summary || `${profile.name}'s professional portfolio`} />
-                <meta name="robots" content="index, follow" />
-            </Head>
+            <PublicPageMeta title={title} description={description} canonicalUrl={canonicalUrl} schema={schema} />
             <main className="min-h-screen bg-[#F4F7F9] text-[#1E293B]">
                 <header className="border-b border-slate-200 bg-white">
                     <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-5 py-4">

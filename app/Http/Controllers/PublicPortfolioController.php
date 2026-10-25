@@ -16,6 +16,7 @@ class PublicPortfolioController extends Controller
         $user = $this->publicUser($slug);
 
         return Inertia::render('portfolio/public', [
+            'canonicalUrl' => route('portfolio.public', $user->portfolio_slug),
             'profile' => $user->only([
                 'name',
                 'portfolio_slug',

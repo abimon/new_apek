@@ -37,6 +37,7 @@ export default function ProjectShow({ project, relatedProjects, canonicalUrl }: 
         <>
             <Head title={`${project.title} | APEK Technologies Kenya case study`}>
                 <meta name="description" content={description} />
+                <meta name="robots" content="index, follow, max-image-preview:large" />
                 <meta property="og:type" content="article" />
                 <meta property="og:site_name" content="APEK Technologies" />
                 <meta property="og:locale" content="en_KE" />
@@ -56,9 +57,14 @@ export default function ProjectShow({ project, relatedProjects, canonicalUrl }: 
                             <span className="flex h-9 w-9 items-center justify-center bg-[#2C3E50] text-sm text-white">AT</span>
                             <span>Apek<span className="text-[#C07A50]">Tech</span></span>
                         </Link>
-                        <Link href={`${route('home')}#work`} className="inline-flex items-center gap-2 text-sm font-semibold text-[#2C3E50] hover:text-[#C07A50]">
-                            <ArrowLeft size={16} /> All work
-                        </Link>
+                        <nav aria-label="Page navigation" className="flex flex-wrap items-center gap-5 text-sm font-semibold text-[#2C3E50]">
+                            <Link href={`${route('home')}#work`} className="inline-flex items-center gap-2 hover:text-[#C07A50]">
+                                <ArrowLeft size={16} /> All work
+                            </Link>
+                            <Link href={route('services')} className="hover:text-[#C07A50]">Services</Link>
+                            <Link href={route('about')} className="hover:text-[#C07A50]">About</Link>
+                            <Link href={route('contact')} className="hover:text-[#C07A50]">Contact</Link>
+                        </nav>
                     </div>
                 </header>
                 <main>
